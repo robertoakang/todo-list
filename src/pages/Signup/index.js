@@ -63,7 +63,7 @@ export default function Signup() {
           },
         ],
         link: {
-          route: '/',
+          route: '/todo',
           text: 'Já tem uma conta? Entre.',
         },
         handle: handleSignup,

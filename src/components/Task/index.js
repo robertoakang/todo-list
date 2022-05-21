@@ -37,12 +37,12 @@ function Task({tasks, onTaskUpdate}) {
                 <FormGroup row>
                 { filterTasksTodo.map(task => (
                       <div className="tasksToConfirm">
-                          <FormControlLabel control={<Checkbox onChange={() => handleCheckFinish(task.id)} />} label={ task.description } />
-                          <FormControlLabel control={<DeleteIcon className="tasksToConfirmIcon" onClick={() => handleRemoveTask(task.id)} />} />
+                          <FormControlLabel control={<Checkbox onChange={() => handleCheckFinish(task._id)} />} label={ task.description } />
+                          <FormControlLabel control={<DeleteIcon className="tasksToConfirmIcon" onClick={() => handleRemoveTask(task._id)} />} />
                       </div>
                         
                     ))}
-                  </FormGroup>
+                </FormGroup>
                 <li>
                     <p>Done</p>
                 </li>

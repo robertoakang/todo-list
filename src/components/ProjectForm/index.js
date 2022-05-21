@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
+import api from '../../service/api'
 import './index.css';
 
-export default function ProjectForm() {
+function ProjectForm({ onCreateProject }) {
 	const [project, setProject] = useState('');
 
 	function handleChangeInput(event) {
@@ -12,7 +15,17 @@ export default function ProjectForm() {
 
 	async function handleCreateProject(event) {
 		event.preventDefault();
-		console.log(project);
+		try {
+			const response = await api.post('/projects', {
+				name: project
+			});
+			toast.success(response.data.message)
+			onCreateProject();
+		} catch (error) {
+			if(error.response) {
+				toast.error(error.response.data.message);
+			}
+		}
 	}
 
 	return (
@@ -33,3 +46,9 @@ export default function ProjectForm() {
 		</div>
 	);
 }
+
+ProjectForm.propTypes = {
+	onCreateProject: PropTypes.func.isRequired,
+};
+
+export default ProjectForm

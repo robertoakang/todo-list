@@ -36,7 +36,7 @@ function AuthProvider({ children }) {
 
     async function SignupHandler(data) {
       try {
-        const response = await api.post('/user/signup', data);
+        const response = await api.post('/users/signup', data);
         api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
         localStorage.setItem('@App:token', response.data.token);
         localStorage.setItem("@App:refreshToken", response.data.refreshToken);
@@ -53,7 +53,7 @@ function AuthProvider({ children }) {
     
     async function LoginHandler(data) {
       try {
-        const response = await api.post('/user/login', data);
+        const response = await api.post('/users/login', data);
         api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
         localStorage.setItem('@App:token', response.data.token);
         localStorage.setItem("@App:refreshToken", response.data.refreshToken);
@@ -87,7 +87,7 @@ function AuthProvider({ children }) {
     }
 
     async function handleRefreshToken() {
-      const response = await api.post('/user/refresh',{
+      const response = await api.post('/users/refresh',{
         payload,
         refreshToken
       });

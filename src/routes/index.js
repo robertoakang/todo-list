@@ -12,11 +12,11 @@ import Signup from '../pages/Signup';
 
 export default function Routes() {
 	const { isAuthenticate } = useAuth();
-	
+
 	return (
 		<Router>
 			<Switch>
-				<Route path="/" element={<Login />} />
+				<Route path="/" element={isAuthenticate ? <Home /> : <Login />} />
 				<Route path="/todo" element={isAuthenticate ? <Home /> : <Navigate to="/" />} />
 				<Route path="/signup" element={<Signup />} />
 			</Switch>

@@ -10,7 +10,29 @@ export default function MainBox() {
 		setProjects([
 		  {
 		    name: 'teste 1',
-		    tasks: [],
+		    tasks: [
+				{
+					description: "123",
+					status: 1,
+					id: "1"
+				},
+				{
+					description: "121233",
+					status: 1,
+					id: "2"
+				},
+				{
+					description: "1231231",
+					status: 2,
+					finished_at: "2022-05-21T02:31:10.650Z",
+					id: "3"
+				},
+				{
+					description: "123123123123",
+					status: 2,
+					finished_at: "2022-05-21T02:31:10.650Z",
+					id: "4"
+				}],
 		    users: [{
 		      id: '123',
 		    }],
@@ -18,7 +40,12 @@ export default function MainBox() {
 		  },
 		  {
 		    name: 'teste 2',
-		    tasks: [],
+		    tasks: [
+				{
+					description: "121233",
+					status: 1,
+					id: "5"
+				},],
 		    users: [{
 		      id: '123',
 		    }],

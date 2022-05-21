@@ -5,6 +5,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button, TextField } from '@mui/material';
 import PropTypes from 'prop-types';
+import Task from '../Task';
+
 import './index.css';
 
 function BoxProjects({ onTaskCreate, project }) {
@@ -43,19 +45,19 @@ function BoxProjects({ onTaskCreate, project }) {
 				</div>
 			</div>
 
-			{/* <Task tasks={project.tasks} key={Math.random()} onTaskUpdate={onTaskCreate} /> */}
+			<Task tasks={project.tasks} key={Math.random()} onTaskUpdate={onTaskCreate} />
       <div className="addNewTask">
 				<TextField
 					className="addNewTaskInput"
 					margin="none"
 					id="taskName"
-					label="Nome da tarefa"
+					label="Task"
 					name="taskName"
 					autoComplete="taskName"
 					// onChange={handleChangeInput}
 					type="text"
 				/>
-				<Button onClick={() => handleStoreTaskAndAssociateProject(project.id)}>Adicionar</Button>
+				<Button onClick={() => handleStoreTaskAndAssociateProject(project.id)}>Add</Button>
       </div>
 		</div>
 	);
@@ -66,7 +68,14 @@ BoxProjects.propTypes = {
 	project: PropTypes.arrayOf(
 		PropTypes.shape({
 			name: PropTypes.string,
-			tasks: PropTypes.arrayOf(PropTypes.string),
+			tasks: PropTypes.arrayOf(
+				PropTypes.shape({
+					id: PropTypes.string,
+					description: PropTypes.string,
+					status: PropTypes.number,
+					finished_at: PropTypes.string
+				})
+			),
 			users: PropTypes.arrayOf(
 				PropTypes.shape({
 					id: PropTypes.string,

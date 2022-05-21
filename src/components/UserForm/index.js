@@ -129,11 +129,7 @@ UserForm.propTypes = {
 		).isRequired,
 		link: PropTypes.string,
 		handle: PropTypes.func.isRequired,
-	}),
-};
-
-UserForm.defaultProps = {
-	properties: {},
+	}).isRequired,
 };
 
 export default UserForm;

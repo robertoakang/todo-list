@@ -1,14 +1,13 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 // import Task from '../Task';
-import './index.css';
-import { toast } from 'react-toastify';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button, TextField } from '@mui/material';
+import PropTypes from 'prop-types';
+import './index.css';
 
-export default function BoxProjects({ onTaskCreate, project }) {
+function BoxProjects({ onTaskCreate, project }) {
 	const [descriptionTask, setDescriptionTask] = useState('');
 	const [isModalVisible, setIsModalVisible] = useState(false);
 	const [dataModal, setDataModal] = useState({});
@@ -24,7 +23,7 @@ export default function BoxProjects({ onTaskCreate, project }) {
 	const handleEditProject = async (id) => {
 		console.log(id)
 	};
-
+	
 	return (
 		<div className="container">
 			<div className="container-title">
@@ -44,6 +43,7 @@ export default function BoxProjects({ onTaskCreate, project }) {
 				</div>
 			</div>
 
+			{/* <Task tasks={project.tasks} key={Math.random()} onTaskUpdate={onTaskCreate} /> */}
       <div className="addNewTask">
 				<TextField
 					className="addNewTaskInput"
@@ -60,3 +60,21 @@ export default function BoxProjects({ onTaskCreate, project }) {
 		</div>
 	);
 }
+
+BoxProjects.propTypes = {
+	onTaskCreate: PropTypes.func.isRequired, 
+	project: PropTypes.arrayOf(
+		PropTypes.shape({
+			name: PropTypes.string,
+			tasks: PropTypes.arrayOf(PropTypes.string),
+			users: PropTypes.arrayOf(
+				PropTypes.shape({
+					id: PropTypes.string,
+			})
+			),
+			id: PropTypes.string
+		})
+	).isRequired
+};
+
+export default BoxProjects;

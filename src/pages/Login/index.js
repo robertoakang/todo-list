@@ -1,10 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Form from '../../components/Form';
 
 export default function Login() {
+  const navigate = useNavigate();
+
   async function handleLogin(fields) {
     const { email, password } = fields;
     console.log({ email, password });
+    navigate('/todo');
   }
 
   return (

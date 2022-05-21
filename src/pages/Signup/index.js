@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Form from '../../components/Form';
 
 export default function Signup() {
+  const navigate = useNavigate();
   async function handleSignup(fields) {
     const {
       name, email, password, passwordConfirmation,
@@ -9,6 +11,8 @@ export default function Signup() {
     console.log({
       name, email, password, passwordConfirmation,
     });
+
+    navigate('/todo');
   }
 
   return (

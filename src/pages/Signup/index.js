@@ -1,24 +1,31 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useAuth } from '../../context/auth';
 import UserForm from '../../components/UserForm';
 
 export default function Signup() {
 	const navigate = useNavigate();
+	const { SignupHandler } = useAuth();
+
 	async function handleSignup(fields) {
 		const { name, email, password, passwordConfirmation } = fields;
 		if (password !== passwordConfirmation) {
 			toast.warning('As senhas não conferem!');
 		} else {
-			toast.success('Usuário criado com sucesso!');
-			navigate('/todo');
-		}
-		console.log({
-			name,
-			email,
-			password,
-			passwordConfirmation,
-		});
+			const error = await SignupHandler({
+				name,
+				email,
+				password,
+				passwordConfirmation,
+			})
+			
+			if(!error) {
+				toast.success('Usuário criado com sucesso!');
+				navigate('/todo');
+			}
+
+		};
 	}
 
 	return (

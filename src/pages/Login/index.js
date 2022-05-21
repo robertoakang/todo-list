@@ -1,14 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/auth';
 import UserForm from '../../components/UserForm';
 
 export default function Login() {
 	const navigate = useNavigate();
+	const { LoginHandler } = useAuth();
 
 	async function handleLogin(fields) {
 		const { email, password } = fields;
-		console.log({ email, password });
-		navigate('/todo');
+		const error = await LoginHandler({ email, password })
+		if(!error) navigate('/todo');
 	}
 
 	return (

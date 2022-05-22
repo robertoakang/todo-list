@@ -31,13 +31,6 @@
     width: 400px;
 }
 
-.finished-label {
-    font-size: 10px;
-    font-weight: 600;
-    color: #494949;
-    padding: 5px;
-}
-
 .tasksToConfirm {
     width: 100%;
     display: flex;

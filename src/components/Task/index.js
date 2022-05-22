@@ -1,18 +1,14 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
-import { format, parse, parseISO } from "date-fns";
-import React, { useState } from "react";
+import { format, parseISO } from "date-fns";
+import React from "react";
 import { toast } from "react-toastify";
-import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import PropTypes from 'prop-types';
 
-import './index.css';
-import { Checkbox, FormControlLabel, FormGroup, Grid } from "@mui/material";
+import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import api from "../../service/api";
+import './index.css';
 
 function Task({tasks, onTaskUpdate}) {
-    const [taskFinish, setTaskFinish] = useState(false);
-
     const filterTasksTodo = tasks.filter(task => task.status === 1);
 
     const filterTasksDone = tasks.filter(task => task.status === 2);
@@ -30,7 +26,6 @@ function Task({tasks, onTaskUpdate}) {
 				}
 			}
       onTaskUpdate();
-      setTaskFinish(true);
     }
 
     const handleRemoveTask = async (id) =>  {
@@ -79,5 +74,12 @@ function Task({tasks, onTaskUpdate}) {
 
     );   
 }
+
+
+
+Task.propTypes = {
+  tasks: PropTypes.node.isRequired,
+  onTaskUpdate: PropTypes.func.isRequired
+};
 
 export default Task;

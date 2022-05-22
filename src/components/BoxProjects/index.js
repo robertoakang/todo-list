@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import EditIcon from '@mui/icons-material/Edit';
@@ -13,6 +12,7 @@ import './index.css';
 import api from '../../service/api';
 
 function BoxProjects({ onTaskCreate, project }) {
+	const textInput = React.useRef(null);
 	const [taskName, setTaskName] = useState('');
 	const [projectName, setProjectName] = useState('');
 	const [isModalVisible, setIsModalVisible] = useState(false);
@@ -27,6 +27,7 @@ function BoxProjects({ onTaskCreate, project }) {
 			})
 			
 			if(response.data.message) toast.success(response.data.message);
+			textInput.current.value = "";
 			onTaskCreate();
 		} catch (error) {
 			if(error.response) {
@@ -138,6 +139,7 @@ function BoxProjects({ onTaskCreate, project }) {
 						label="Task"
 						name="taskName"
 						autoComplete="taskName"
+						inputRef={textInput}
 						onChange={(e) => setTaskName(e.target.value)}
 						type="text"
 					/>

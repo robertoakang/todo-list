@@ -20,6 +20,7 @@ function ProjectForm({ onCreateProject }) {
 				name: project
 			});
 			toast.success(response.data.message)
+			setProject('')
 			onCreateProject();
 		} catch (error) {
 			if(error.response) {

@@ -38,7 +38,7 @@ export default function MainBox() {
 			) : (
 				<div className="container">
 					<p className="noProjects">
-						Não existem projetos associados a esse usuário.
+						There are no projects associated with this user. <b>Create now!</b>
 					</p>
 				</div>
 			)}

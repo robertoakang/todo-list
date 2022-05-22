@@ -30,11 +30,11 @@ function ProjectForm({ onCreateProject }) {
 
 	return (
 		<div className="box-form">
-			<h3>CRIAR NOVO PROJETO</h3>
+			<h3>CREATE NEW PROJECT</h3>
 			<TextField
 				margin="none"
 				id="projectName"
-				label="Nome do projeto"
+				label="Project Name"
 				name="projectName"
 				autoComplete="projectName"
 				onChange={handleChangeInput}
@@ -42,7 +42,7 @@ function ProjectForm({ onCreateProject }) {
 				type="text"
 				className="input-field"
 			/>
-			<Button onClick={handleCreateProject}>Criar</Button>
+			<Button onClick={handleCreateProject}>CREATE</Button>
 		</div>
 	);
 }

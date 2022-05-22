@@ -11,7 +11,7 @@ export default function Signup() {
 	async function handleSignup(fields) {
 		const { name, email, password, passwordConfirmation } = fields;
 		if (password !== passwordConfirmation) {
-			toast.warning('As senhas não conferem!');
+			toast.warning(`Passwords don't match!`);
 		} else {
 			const error = await SignupHandler({
 				name,
@@ -31,13 +31,13 @@ export default function Signup() {
 	return (
 		<UserForm
 			properties={{
-				title: 'CADASTRE-SE',
+				title: 'SIGN UP',
 				fields: [
 					{
-						name: 'Nome',
+						name: 'Name',
 						required: true,
 						id: 'name',
-						label: 'Nome',
+						label: 'Name',
 						autoComplete: 'name',
 						autoFocus: true,
 						type: 'input',
@@ -57,7 +57,7 @@ export default function Signup() {
 						name: 'Password',
 						required: true,
 						id: 'password',
-						label: 'Senha',
+						label: 'Password',
 						autoComplete: 'current-password',
 						autoFocus: false,
 						type: 'password',
@@ -67,7 +67,7 @@ export default function Signup() {
 						name: 'PasswordConfirmation',
 						required: true,
 						id: 'passwordConfirmation',
-						label: 'Confirmação de senha',
+						label: 'Password confirmation',
 						autoComplete: 'current-password-confirmation',
 						autoFocus: false,
 						type: 'password',
@@ -76,12 +76,12 @@ export default function Signup() {
 					{
 						type: 'submit',
 						inputType: 'Button',
-						label: 'Cadastrar',
+						label: 'Sign up',
 					},
 				],
 				link: {
 					route: '/todo',
-					text: 'Já tem uma conta? Entre.',
+					text: 'Do you already have an account? Login now.',
 				},
 				handle: handleSignup,
 			}}

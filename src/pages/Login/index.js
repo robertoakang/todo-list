@@ -32,7 +32,7 @@ export default function Login() {
 						name: 'Password',
 						required: true,
 						id: 'password',
-						label: 'Senha',
+						label: 'Password',
 						autoComplete: 'current-password',
 						autoFocus: false,
 						type: 'password',
@@ -41,12 +41,12 @@ export default function Login() {
 					{
 						type: 'submit',
 						inputType: 'Button',
-						label: 'Entrar',
+						label: 'Login',
 					},
 				],
 				link: {
 					route: '/signup',
-					text: 'Não tem uma conta? Cadastre-se.',
+					text: `Don't you have an account? Sign up.`,
 				},
 				handle: handleLogin,
 			}}

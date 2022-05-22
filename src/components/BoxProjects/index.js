@@ -20,8 +20,19 @@ function BoxProjects({ onTaskCreate, project }) {
 	const [dataModal, setDataModal] = useState({});
 
 	const handleStoreTaskProject = async (id) => {
-		console.log(id);
-		console.log(taskName)
+		try {
+			const response = await api.post(`/tasks`, {
+				name: taskName,
+				projectId: id
+			})
+			
+			if(response.data.message) toast.success(response.data.message);
+			onTaskCreate();
+		} catch (error) {
+			if(error.response) {
+				toast.error(error.response.data.message);
+			}
+		}
 	}
 
 	const handleDeleteProject = async (id) => {

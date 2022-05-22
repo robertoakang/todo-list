@@ -8,6 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import './index.css';
 import { Checkbox, FormControlLabel, FormGroup, Grid } from "@mui/material";
+import api from "../../service/api";
 
 function Task({tasks, onTaskUpdate}) {
     const [taskFinish, setTaskFinish] = useState(false);
@@ -17,14 +18,32 @@ function Task({tasks, onTaskUpdate}) {
     const filterTasksDone = tasks.filter(task => task.status === 2);
 
     const handleCheckFinish = async (id) =>  {
-      onTaskUpdate()
-      console.log(id)
+			try {
+				const response = await api.put(`/tasks/${id}`, {
+          finished_at: new Date(),
+          status: 2,
+				})
+				if(response.data.message) toast.success(response.data.message);
+			} catch (error) {
+				if(error.response) {
+					toast.error(error.response.data.message);
+				}
+			}
+      onTaskUpdate();
       setTaskFinish(true);
     }
 
     const handleRemoveTask = async (id) =>  {
+      try {
+        const response = await api.delete(`/tasks/${id}`)
+        if(response.data.message) toast.success(response.data.message);
+        onTaskUpdate();
+      } catch (error) {
+        if(error.response) {
+          toast.error(error.response.data.message);
+        }
+      }
       onTaskUpdate()
-      console.log(id)
     }
 
     const formattedDate = (date) => format(parseISO(date), 'dd/MM/yyyy HH:mm');
@@ -37,7 +56,7 @@ function Task({tasks, onTaskUpdate}) {
                 <FormGroup row>
                 { filterTasksTodo.map(task => (
                       <div className="tasksToConfirm">
-                          <FormControlLabel control={<Checkbox onChange={() => handleCheckFinish(task._id)} />} label={ task.description } />
+                          <FormControlLabel control={<Checkbox onChange={() => handleCheckFinish(task._id)} />} label={ task.name } />
                           <FormControlLabel control={<DeleteIcon className="tasksToConfirmIcon" onClick={() => handleRemoveTask(task._id)} />} />
                       </div>
                         
@@ -49,8 +68,8 @@ function Task({tasks, onTaskUpdate}) {
                 <FormGroup>
                 { filterTasksDone.map(task => (
                   <>
-                    <FormControlLabel disabled control={<Checkbox checked={!!task.finished_at} />} label={ task.description } />
-                    <small className="finished-label">{task.finished_at !== undefined ? `Finalizado em: ${formattedDate(task.finished_at)}` : '' }</small>
+                    <FormControlLabel disabled control={<Checkbox checked={!!task.finished_at} />} label={ task.name } />
+                    <small className="finished-label">{task.finished_at !== undefined ? `Finished at: ${formattedDate(task.finished_at)}` : '' }</small>
                   </>
                     ))}
                 </FormGroup>

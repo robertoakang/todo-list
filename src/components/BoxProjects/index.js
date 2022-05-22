@@ -13,14 +13,16 @@ import './index.css';
 import api from '../../service/api';
 
 function BoxProjects({ onTaskCreate, project }) {
-	const [descriptionTask, setDescriptionTask] = useState('');
+	const [taskName, setTaskName] = useState('');
+	const [projectName, setProjectName] = useState('');
 	const [isModalVisible, setIsModalVisible] = useState(false);
 	const [isModalVisibleEdit, setIsModalVisibleEdit] = useState(false);
 	const [dataModal, setDataModal] = useState({});
 
-	const handleStoreTaskAndAssociateProject = async (id) => {
-		console.log(id)
-	};
+	const handleStoreTaskProject = async (id) => {
+		console.log(id);
+		console.log(taskName)
+	}
 
 	const handleDeleteProject = async (id) => {
 		try {
@@ -38,12 +40,25 @@ function BoxProjects({ onTaskCreate, project }) {
 	const handleEditProject = async (id) => {
 		const response = await api.get(`/projects/${id}`);
 		setDataModal(response.data.project);
+		setProjectName(response.data.project.name)
 		setIsModalVisibleEdit(true);
 	};
 
 	const handleEditProjectConfirm = async (id) => {
+		if(projectName !== dataModal.name) {
+			try {
+				const response = await api.put(`/projects/${id}`, {
+					name: projectName
+				})
+				if(response.data.message) toast.success(response.data.message);
+				onTaskCreate();
+			} catch (error) {
+				if(error.response) {
+					toast.error(error.response.data.message);
+				}
+			}
+		}
 		setIsModalVisibleEdit(false)
-		console.log(id)
 	};
 
 	
@@ -56,38 +71,25 @@ function BoxProjects({ onTaskCreate, project }) {
 					title="EDIT"
 					description=""
 				>
+					<TextField
+						autoFocus
+						margin="dense"
+						id="projectName"
+						label="Project Name"
+						type="text"
+						defaultValue={dataModal.name}
+						onChange={(e) => setProjectName(e.target.value)}
+						fullWidth
+						variant="standard"
+					/>
 					<div>
-						<h4>Usuários associados: </h4>
-
-						{/* <div className="assoc-user">
-								{ dataModal.users.length > 0 ? dataModal.users.map((item) => (
-												<>
-														<input type="checkbox" checked/>
-														<label htmlFor='checkbox'>{item.name}</label>
-												</>
-										)) : <h1>Não há usuário associado a este projeto</h1>}
-								
-						</div> */}
-
+						<h4>Associate Users: </h4>
 						<FormGroup row>
 							{ dataModal.users.map(item => (
-										<div className="tasksToConfirm">
-												<FormControlLabel control={<Checkbox checked />} label={ item.name } />
-										</div>
-											
-									))}
-							</FormGroup>
+								<FormControlLabel control={<Checkbox checked />} label={ item.name } />
+							))}
+						</FormGroup>
 					</div>
-					<TextField
-            autoFocus
-            margin="dense"
-            id="projectName"
-            label="Project Name"
-            type="text"
-						value={dataModal.name}
-            fullWidth
-            variant="standard"
-          />
 				</DialogEditModal>
 			: null}
 
@@ -125,10 +127,10 @@ function BoxProjects({ onTaskCreate, project }) {
 						label="Task"
 						name="taskName"
 						autoComplete="taskName"
-						// onChange={handleChangeInput}
+						onChange={(e) => setTaskName(e.target.value)}
 						type="text"
 					/>
-					<Button onClick={() => handleStoreTaskAndAssociateProject(project._id)}>Add</Button>
+					<Button onClick={() => handleStoreTaskProject(project._id)}>Add</Button>
 				</div>
 			</div>
 	);

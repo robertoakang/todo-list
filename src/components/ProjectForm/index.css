@@ -13,6 +13,10 @@
     order: 0;
 }
 
+.box-form h3 {
+    font-size: 16px;
+}
+
 .box-form p {
     font-size: 20px;
 }

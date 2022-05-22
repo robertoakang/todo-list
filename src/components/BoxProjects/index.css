@@ -78,6 +78,7 @@
     border: none;
     color: #fff;
     background-color: transparent;
+    cursor: pointer;
 }
 
 .actions button:hover{

@@ -37,9 +37,9 @@ function DialogModal({onClose, onConfirm, title, description}) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Fechar</Button>
+          <Button onClick={handleClose}>No</Button>
           <Button onClick={handleConfirm} autoFocus>
-            Confirmar
+            Yes
           </Button>
         </DialogActions>
       </Dialog>

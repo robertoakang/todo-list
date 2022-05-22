@@ -3,8 +3,7 @@ import React from "react";
 import { toast } from "react-toastify";
 import DeleteIcon from '@mui/icons-material/Delete';
 import PropTypes from 'prop-types';
-
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { Checkbox, FormControlLabel, FormGroup, Tooltip } from "@mui/material";
 import api from "../../service/api";
 import './index.css';
 
@@ -41,7 +40,7 @@ function Task({tasks, onTaskUpdate}) {
       onTaskUpdate()
     }
 
-    const formattedDate = (date) => format(parseISO(date), 'dd/MM/yyyy HH:mm');
+    const formatDate = (date) => format(parseISO(date), 'dd/MM/yyyy HH:mm');
     return (
         <div className="list">
             <ul className="task-status-list">
@@ -62,11 +61,10 @@ function Task({tasks, onTaskUpdate}) {
                 </li>
                 <FormGroup>
                 { filterTasksDone.map(task => (
-                  <>
+                  <Tooltip title={`Finished at: ${formatDate(task.finished_at)}`} arrow placement="bottom-start" followCursor>
                     <FormControlLabel disabled control={<Checkbox checked={!!task.finished_at} />} label={ task.name } />
-                    <small className="finished-label">{task.finished_at !== undefined ? `Finished at: ${formattedDate(task.finished_at)}` : '' }</small>
-                  </>
-                    ))}
+                  </Tooltip>
+                ))}
                 </FormGroup>
             </ul>
             

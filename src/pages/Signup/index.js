@@ -21,7 +21,7 @@ export default function Signup() {
 			})
 			
 			if(!error) {
-				toast.success('Usuário criado com sucesso!');
+				toast.success('Welcome!');
 				navigate('/todo');
 			}
 
@@ -81,7 +81,7 @@ export default function Signup() {
 				],
 				link: {
 					route: '/todo',
-					text: 'Do you already have an account? Login now.',
+					text: 'Already have an account? Login now.',
 				},
 				handle: handleSignup,
 			}}

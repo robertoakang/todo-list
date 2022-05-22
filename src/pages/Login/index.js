@@ -46,7 +46,7 @@ export default function Login() {
 				],
 				link: {
 					route: '/signup',
-					text: `Don't you have an account? Sign up.`,
+					text: `Don't have an account? Sign up.`,
 				},
 				handle: handleLogin,
 			}}

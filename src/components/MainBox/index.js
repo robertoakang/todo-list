@@ -3,10 +3,22 @@ import { toast } from 'react-toastify';
 import api from '../../service/api';
 import BoxProjects from '../BoxProjects';
 import ProjectForm from '../ProjectForm';
+import FullPageLoader from "../LoadingSpinner";
 import './index.css';
+
+const useFullPageLoader = () => {
+    const [loading, setLoading] = useState(false);
+
+    return [
+        loading ? <FullPageLoader /> : null,
+        () => setLoading(true),
+        () => setLoading(false) 
+    ];
+};
 
 export default function MainBox() {
 	const [projects, setProjects] = useState([]);
+  const [loader, showLoader, hideLoader] = useFullPageLoader();
 
 	const getProjects = async () => {
 		try {
@@ -20,8 +32,11 @@ export default function MainBox() {
 	};
 
 	useEffect(() => {
+		showLoader()
 		setTimeout(() => {
-			getProjects();
+			getProjects().then(() => {
+				hideLoader()
+			});
 		}, 200);
 	}, []);
 
@@ -43,6 +58,7 @@ export default function MainBox() {
 				</div>
 			)}
 			<ProjectForm onCreateProject={() => getProjects()} />
+      {loader}
 		</div>
 	);
 }

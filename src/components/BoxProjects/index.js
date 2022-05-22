@@ -95,7 +95,7 @@ function BoxProjects({ onTaskCreate, project }) {
 						variant="standard"
 					/>
 					<div>
-						<h4>Associate Users: </h4>
+						<h4>Associated Users: </h4>
 						<FormGroup row>
 							{ dataModal.users.map(item => (
 								<FormControlLabel control={<Checkbox checked />} label={ item.name } />
@@ -110,7 +110,7 @@ function BoxProjects({ onTaskCreate, project }) {
 					onClose={() => setIsModalVisible(false)} 
 					onConfirm={() => handleDeleteProject(project._id)}
 					title="DELETE"
-					description="Do you really want to delete the task?"
+					description="Do you really want to delete this project?"
 				/>
 			: null}
 				<div className="container-title">
